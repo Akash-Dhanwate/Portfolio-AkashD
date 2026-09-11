@@ -1,102 +1,36 @@
-# 🚀 Akash — Personal Portfolio
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-> A cinematic, interactive personal portfolio designed to showcase my journey as an engineering student, software developer, builder, and technology enthusiast.
+## Getting Started
 
-![Portfolio Preview](./public/preview.png)
+First, run the development server:
 
-## 🌐 Live Portfolio
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-🔗 **Live Website:** [Coming Soon]
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
----
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## ✨ About The Project
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-This is my personal developer portfolio, built to represent more than just my resume.
+## Learn More
 
-Instead of creating a traditional portfolio with static sections, I wanted to build an immersive experience where the website itself communicates my personality, interests, skills, projects, and ambition.
+To learn more about Next.js, take a look at the following resources:
 
-The portfolio combines **modern web design, cinematic visuals, interactive animations, smooth transitions, and responsive layouts** to create a memorable experience for anyone visiting the website.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-The central visual concept uses a cinematic character that interacts with the visitor through different poses, camera angles, expressions, and cursor-based interactions.
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
----
+## Deploy on Vercel
 
-## 🎯 Purpose
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-The goal of this portfolio is to:
-
-- Showcase my software development skills.
-- Present my projects and technical work.
-- Document my journey as an engineering student.
-- Demonstrate my interest in AI and emerging technologies.
-- Create an interactive and memorable user experience.
-- Provide recruiters with a quick understanding of my technical background.
-- Build a professional online identity.
-
----
-
-## 🧑‍💻 About Me
-
-I'm **Akash**, an engineering student and aspiring software engineer passionate about building technology that solves real-world problems.
-
-I'm particularly interested in:
-
-- 🤖 Artificial Intelligence
-- 💻 Software Engineering
-- 🌐 Full-Stack Development
-- ☁️ Cloud & DevOps
-- 🧠 Data Structures & Algorithms
-- 🏗️ System Design
-- 🚀 Emerging Technologies
-
-I enjoy taking an idea from a simple concept and turning it into a working product.
-
-My philosophy is simple:
-
-> **Don't just learn technology. Build with it.**
-
-I'm continuously learning, experimenting with new technologies, solving challenging problems, and building projects that help me become a better engineer.
-
----
-
-## 🎨 Design Concept
-
-The portfolio follows a **cinematic technology-inspired visual language**.
-
-### Visual Direction
-
-- Dark cinematic interface
-- High-contrast lighting
-- Red / orange / black color palette
-- Premium typography
-- Minimal UI
-- Smooth transitions
-- Interactive character
-- Cursor-based interactions
-- Cinematic photography
-- Glassmorphism where appropriate
-- Subtle gradients and glow effects
-
-The visual design is intentionally different from a conventional developer portfolio.
-
----
-
-## 🖱️ Interactive Experience
-
-One of the main ideas behind the portfolio is to make the character feel like part of the interface rather than simply being an image.
-
-The character can be used to create interactions such as:
-
-```text
-Cursor moves
-     ↓
-Character follows the cursor
-     ↓
-Character changes gaze / pose
-     ↓
-User moves toward a section
-     ↓
-Character responds
-     ↓
-Website section reveals itself
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
