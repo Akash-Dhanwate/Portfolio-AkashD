@@ -11,7 +11,7 @@ export default function BigTextReveal() {
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: false, margin: "-100px" }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-[12vw] leading-none font-extrabold uppercase tracking-tighter text-white/90 drop-shadow-2xl"
+          className="text-[9vw] leading-none font-extrabold uppercase tracking-tighter text-white/90 drop-shadow-2xl"
         >
           Crafting
         </motion.h2>
@@ -20,9 +20,9 @@ export default function BigTextReveal() {
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: false, margin: "-100px" }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-          className="text-[12vw] leading-none font-extrabold uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-neutral-400 to-white"
+          className="text-[9vw] leading-none font-extrabold uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-neutral-400 to-white"
         >
-          The Future
+          <span className="text-c"> The </span> Future
         </motion.h2>
       </div>
     </section>
