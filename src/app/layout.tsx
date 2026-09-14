@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Syne, Outfit } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
+import { Analytics } from "@vercel/analytics/next";
 
 const syne = Syne({ 
   subsets: ["latin"],
@@ -30,6 +31,7 @@ export default function RootLayout({
         <SmoothScroll>
           {children}
         </SmoothScroll>
+        <Analytics />
       </body>
     </html>
   );
