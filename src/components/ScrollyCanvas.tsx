@@ -1,993 +1,3 @@
-// // // "use client";
-
-// // // import { useEffect, useRef, useState, useCallback } from "react";
-// // // import { useScroll, useSpring, useMotionValueEvent } from "framer-motion";
-
-// // // const FRAME_COUNT = 105;
-
-// // // const getImagePath = (index: number) => 
-// // //   `/sequence/frame_${index.toString().padStart(3, '0')}_delay-0.067s.webp`;
-
-// // // export default function ScrollyCanvas({ children }: { children?: React.ReactNode }) {
-// // //   const canvasRef = useRef<HTMLCanvasElement>(null);
-// // //   const containerRef = useRef<HTMLDivElement>(null);
-  
-// // //   const { scrollYProgress } = useScroll({
-// // //     target: containerRef,
-// // //     offset: ["start start", "end end"]
-// // //   });
-
-// // //   // Added spring for buttery smooth frame scrubbing
-// // //   const smoothProgress = useSpring(scrollYProgress, {
-// // //     damping: 20,
-// // //     stiffness: 100,
-// // //     restDelta: 0.0001
-// // //   });
-  
-// // //   const [images, setImages] = useState<HTMLImageElement[]>([]);
-// // //   const [isLoaded, setIsLoaded] = useState(false);
-// // //   const currentFrameIndex = useRef(0);
-
-// // //   useEffect(() => {
-// // //     let loadedCount = 0;
-// // //     const loadedImages: HTMLImageElement[] = [];
-    
-// // //     for (let i = 0; i < FRAME_COUNT; i++) {
-// // //       const img = new Image();
-// // //       img.src = getImagePath(i);
-// // //       img.onload = () => {
-// // //         loadedCount++;
-// // //         if (loadedCount === FRAME_COUNT) {
-// // //           setImages(loadedImages);
-// // //           setIsLoaded(true);
-// // //         }
-// // //       };
-// // //       loadedImages.push(img);
-// // //     }
-// // //   }, []);
-
-// // //   const renderFrame = useCallback((index: number) => {
-// // //     if (!images[index] || !canvasRef.current) return;
-    
-// // //     const canvas = canvasRef.current;
-// // //     const ctx = canvas.getContext("2d");
-// // //     if (!ctx) return;
-    
-// // //     // Match internal canvas size to display size
-// // //     const { width, height } = canvas.getBoundingClientRect();
-// // //     if (canvas.width !== width || canvas.height !== height) {
-// // //       canvas.width = width;
-// // //       canvas.height = height;
-// // //     }
-    
-// // //     // Object-fit: cover logic
-// // //     const img = images[index];
-// // //     const imageAspectRatio = img.width / img.height;
-// // //     const canvasAspectRatio = canvas.width / canvas.height;
-    
-// // //     let renderableHeight, renderableWidth, xStart, yStart;
-    
-// // //     if (imageAspectRatio < canvasAspectRatio) {
-// // //       renderableWidth = canvas.width;
-// // //       renderableHeight = img.height * (canvas.width / img.width);
-// // //       xStart = 0;
-// // //       yStart = (canvas.height - renderableHeight) / 2;
-// // //     } else if (imageAspectRatio > canvasAspectRatio) {
-// // //       renderableHeight = canvas.height;
-// // //       renderableWidth = img.width * (canvas.height / img.height);
-// // //       xStart = (canvas.width - renderableWidth) / 2;
-// // //       yStart = 0;
-// // //     } else {
-// // //       renderableHeight = canvas.height;
-// // //       renderableWidth = canvas.width;
-// // //       xStart = 0;
-// // //       yStart = 0;
-// // //     }
-    
-// // //     ctx.clearRect(0, 0, canvas.width, canvas.height);
-// // //     ctx.drawImage(img, xStart, yStart, renderableWidth, renderableHeight);
-// // //   }, [images]);
-
-// // //   useEffect(() => {
-// // //     if (isLoaded) {
-// // //       renderFrame(0);
-// // //     }
-// // //   }, [isLoaded, renderFrame]);
-
-// // //   useEffect(() => {
-// // //     const handleResize = () => {
-// // //       if (isLoaded) renderFrame(currentFrameIndex.current);
-// // //     };
-// // //     window.addEventListener("resize", handleResize);
-// // //     return () => window.removeEventListener("resize", handleResize);
-// // //   }, [isLoaded, renderFrame]);
-
-// // //   useMotionValueEvent(smoothProgress, "change", (latest) => {
-// // //     if (!isLoaded) return;
-// // //     const frameIndex = Math.min(
-// // //       FRAME_COUNT - 1,
-// // //       Math.max(0, Math.floor(latest * FRAME_COUNT))
-// // //     );
-// // //     currentFrameIndex.current = frameIndex;
-// // //     renderFrame(frameIndex);
-// // //   });
-
-// // //   return (
-// // //     <div ref={containerRef} className="relative h-[500vh] bg-[#121212]">
-// // //       <div className="sticky top-0 h-screen w-full overflow-hidden">
-// // //         <canvas
-// // //           ref={canvasRef}
-// // //           className="absolute inset-0 h-full w-full block"
-// // //         />
-// // //         {/* Parallax Overlay */}
-// // //         {children}
-// // //       </div>
-// // //     </div>
-// // //   );
-// // // }
-
-
-
-
-// // "use client";
-
-// // import {
-// //   useEffect,
-// //   useRef,
-// //   useState,
-// //   useCallback,
-// // } from "react";
-// // import {
-// //   useScroll,
-// //   useMotionValueEvent,
-// // } from "framer-motion";
-
-// // const FRAME_COUNT = 105;
-
-// // const getImagePath = (index: number) =>
-// //   `/sequence/frame_${index.toString().padStart(3, "0")}_delay-0.067s.webp`;
-
-// // export default function ScrollyCanvas({
-// //   children,
-// // }: {
-// //   children?: React.ReactNode;
-// // }) {
-// //   const containerRef = useRef<HTMLDivElement>(null);
-// //   const canvasRef = useRef<HTMLCanvasElement>(null);
-
-// //   // Keep images outside React state.
-// //   // Images do not need to trigger React renders.
-// //   const imagesRef = useRef<HTMLImageElement[]>([]);
-
-// //   const currentFrameRef = useRef(0);
-// //   const requestedFrameRef = useRef(0);
-
-// //   const animationFrameRef = useRef<number | null>(null);
-
-// //   const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
-
-// //   const canvasSizeRef = useRef({
-// //     width: 0,
-// //     height: 0,
-// //     dpr: 1,
-// //   });
-
-// //   const [isLoaded, setIsLoaded] = useState(false);
-
-// //   const { scrollYProgress } = useScroll({
-// //     target: containerRef,
-// //     offset: ["start start", "end end"],
-// //   });
-
-// //   // ============================================================
-// //   // CANVAS RESIZE
-// //   // ============================================================
-
-// //   const resizeCanvas = useCallback(() => {
-// //     const canvas = canvasRef.current;
-
-// //     if (!canvas) return;
-
-// //     const rect = canvas.getBoundingClientRect();
-
-// //     const width = Math.round(rect.width);
-// //     const height = Math.round(rect.height);
-
-// //     // Limit DPR.
-// //     // Retina displays can otherwise create a very large canvas.
-// //     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-
-// //     const previous = canvasSizeRef.current;
-
-// //     // Don't resize if nothing changed.
-// //     if (
-// //       previous.width === width &&
-// //       previous.height === height &&
-// //       previous.dpr === dpr
-// //     ) {
-// //       return;
-// //     }
-
-// //     canvasSizeRef.current = {
-// //       width,
-// //       height,
-// //       dpr,
-// //     };
-
-// //     canvas.width = Math.round(width * dpr);
-// //     canvas.height = Math.round(height * dpr);
-
-// //     canvas.style.width = `${width}px`;
-// //     canvas.style.height = `${height}px`;
-
-// //     const ctx = ctxRef.current;
-
-// //     if (!ctx) return;
-
-// //     // Work in CSS pixels while using the higher resolution backing canvas.
-// //     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-// //     // Re-render current frame after resizing.
-// //     drawFrame(currentFrameRef.current);
-// //   }, []);
-
-// //   // ============================================================
-// //   // DRAW FRAME
-// //   // ============================================================
-
-// //   const drawFrame = useCallback((index: number) => {
-// //     const canvas = canvasRef.current;
-// //     const ctx = ctxRef.current;
-// //     const images = imagesRef.current;
-
-// //     if (!canvas || !ctx) return;
-
-// //     const img = images[index];
-
-// //     if (!img || !img.complete || img.naturalWidth === 0) {
-// //       return;
-// //     }
-
-// //     const { width, height } = canvasSizeRef.current;
-
-// //     if (!width || !height) return;
-
-// //     const imageAspect = img.naturalWidth / img.naturalHeight;
-// //     const canvasAspect = width / height;
-
-// //     let drawWidth: number;
-// //     let drawHeight: number;
-// //     let x: number;
-// //     let y: number;
-
-// //     // ==========================================================
-// //     // OBJECT-FIT: COVER
-// //     // ==========================================================
-
-// //     if (imageAspect > canvasAspect) {
-// //       // Image is wider than canvas.
-// //       drawHeight = height;
-// //       drawWidth = height * imageAspect;
-
-// //       x = (width - drawWidth) / 2;
-// //       y = 0;
-// //     } else {
-// //       // Image is taller than canvas.
-// //       drawWidth = width;
-// //       drawHeight = width / imageAspect;
-
-// //       x = 0;
-// //       y = (height - drawHeight) / 2;
-// //     }
-
-// //     ctx.clearRect(0, 0, width, height);
-
-// //     ctx.drawImage(
-// //       img,
-// //       x,
-// //       y,
-// //       drawWidth,
-// //       drawHeight
-// //     );
-
-// //     currentFrameRef.current = index;
-// //   }, []);
-
-// //   // ============================================================
-// //   // REQUEST ANIMATION FRAME
-// //   // ============================================================
-
-// //   const scheduleFrame = useCallback(
-// //     (index: number) => {
-// //       requestedFrameRef.current = index;
-
-// //       // Already scheduled.
-// //       if (animationFrameRef.current !== null) {
-// //         return;
-// //       }
-
-// //       animationFrameRef.current = requestAnimationFrame(() => {
-// //         animationFrameRef.current = null;
-
-// //         const frame = requestedFrameRef.current;
-
-// //         // Don't redraw the exact same frame.
-// //         if (frame === currentFrameRef.current) {
-// //           return;
-// //         }
-
-// //         drawFrame(frame);
-// //       });
-// //     },
-// //     [drawFrame]
-// //   );
-
-// //   // ============================================================
-// //   // PRELOAD ALL FRAMES
-// //   // ============================================================
-
-// //   useEffect(() => {
-// //     let cancelled = false;
-
-// //     const preloadImages = async () => {
-// //       const images: HTMLImageElement[] = [];
-
-// //       for (let i = 0; i < FRAME_COUNT; i++) {
-// //         const img = new Image();
-
-// //         img.decoding = "async";
-// //         img.src = getImagePath(i);
-
-// //         images.push(img);
-// //       }
-
-// //       imagesRef.current = images;
-
-// //       try {
-// //         // Wait for all images to load.
-// //         await Promise.all(
-// //           images.map((img) => {
-// //             if (img.complete) {
-// //               return img.decode?.().catch(() => {});
-// //             }
-
-// //             return new Promise<void>((resolve) => {
-// //               img.onload = async () => {
-// //                 try {
-// //                   await img.decode?.();
-// //                 } catch {
-// //                   // Ignore decode errors.
-// //                 }
-
-// //                 resolve();
-// //               };
-
-// //               img.onerror = () => {
-// //                 resolve();
-// //               };
-// //             });
-// //           })
-// //         );
-// //       } finally {
-// //         if (!cancelled) {
-// //           setIsLoaded(true);
-// //         }
-// //       }
-// //     };
-
-// //     preloadImages();
-
-// //     return () => {
-// //       cancelled = true;
-// //     };
-// //   }, []);
-
-// //   // ============================================================
-// //   // INITIALIZE CANVAS
-// //   // ============================================================
-
-// //   useEffect(() => {
-// //     const canvas = canvasRef.current;
-
-// //     if (!canvas) return;
-
-// //     const ctx = canvas.getContext("2d", {
-// //       alpha: false,
-// //       desynchronized: true,
-// //     });
-
-// //     if (!ctx) return;
-
-// //     ctxRef.current = ctx;
-
-// //     resizeCanvas();
-
-// //     const observer = new ResizeObserver(() => {
-// //       resizeCanvas();
-// //     });
-
-// //     observer.observe(canvas);
-
-// //     return () => {
-// //       observer.disconnect();
-// //     };
-// //   }, [resizeCanvas]);
-
-// //   // ============================================================
-// //   // FIRST FRAME
-// //   // ============================================================
-
-// //   useEffect(() => {
-// //     if (!isLoaded) return;
-
-// //     resizeCanvas();
-
-// //     // Draw first frame immediately.
-// //     drawFrame(0);
-// //   }, [isLoaded, drawFrame, resizeCanvas]);
-
-// //   // ============================================================
-// //   // SCROLL → FRAME
-// //   // ============================================================
-
-// //   useMotionValueEvent(scrollYProgress, "change", (progress) => {
-// //     if (!isLoaded) return;
-
-// //     const clampedProgress = Math.max(
-// //       0,
-// //       Math.min(1, progress)
-// //     );
-
-// //     const frameIndex = Math.min(
-// //       FRAME_COUNT - 1,
-// //       Math.floor(
-// //         clampedProgress * (FRAME_COUNT - 1)
-// //       )
-// //     );
-
-// //     scheduleFrame(frameIndex);
-// //   });
-
-// //   // ============================================================
-// //   // CLEANUP
-// //   // ============================================================
-
-// //   useEffect(() => {
-// //     return () => {
-// //       if (animationFrameRef.current !== null) {
-// //         cancelAnimationFrame(animationFrameRef.current);
-// //       }
-// //     };
-// //   }, []);
-
-// //   // ============================================================
-// //   // RENDER
-// //   // ============================================================
-
-// //   return (
-// //     <div
-// //       ref={containerRef}
-// //       className="relative h-[500vh] bg-[#121212]"
-// //     >
-// //       <div className="sticky top-0 h-screen w-full overflow-hidden">
-
-// //         <canvas
-// //           ref={canvasRef}
-// //           className="absolute inset-0 block h-full w-full"
-// //         />
-
-// //         {/* Text / Portfolio Overlay */}
-// //         {children}
-
-// //       </div>
-// //     </div>
-// //   );
-// // }
-
-
-
-
-// "use client";
-
-// import {
-//   useEffect,
-//   useRef,
-//   useState,
-//   useCallback,
-// } from "react";
-
-// import {
-//   motion,
-//   useScroll,
-//   useMotionValueEvent,
-//   useTransform,
-//   MotionValue,
-// } from "framer-motion";
-
-// const FRAME_COUNT = 105;
-
-// const getImagePath = (index: number) =>
-//   `/sequence/frame_${index
-//     .toString()
-//     .padStart(3, "0")}_delay-0.067s.webp`;
-
-// type ScrollyCanvasProps = {
-//   children?: React.ReactNode;
-
-//   // Allows Overlay to receive exactly the same scroll progress.
-//   onProgress?: (progress: MotionValue<number>) => void;
-// };
-
-// export default function ScrollyCanvas({
-//   children,
-//   onProgress,
-// }: ScrollyCanvasProps) {
-//   const containerRef = useRef<HTMLDivElement>(null);
-//   const canvasRef = useRef<HTMLCanvasElement>(null);
-
-//   const imagesRef = useRef<HTMLImageElement[]>([]);
-
-//   const currentFrameRef = useRef(0);
-//   const requestedFrameRef = useRef(0);
-
-//   const animationFrameRef = useRef<number | null>(null);
-
-//   const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
-
-//   const canvasSizeRef = useRef({
-//     width: 0,
-//     height: 0,
-//     dpr: 1,
-//   });
-
-//   const [isLoaded, setIsLoaded] = useState(false);
-
-//   // ============================================================
-//   // SCROLL PROGRESS
-//   // ============================================================
-
-//   const { scrollYProgress } = useScroll({
-//     target: containerRef,
-//     offset: ["start start", "end end"],
-//   });
-
-//   // Give the parent/overlay access to the SAME progress.
-//   useEffect(() => {
-//     onProgress?.(scrollYProgress);
-//   }, [onProgress, scrollYProgress]);
-
-//   // ============================================================
-//   // SQUARE TRANSFORMATION
-//   // ============================================================
-
-//   /*
-//     0%   → fullscreen
-//     65%  → fullscreen
-//     82%  → medium square
-//     100% → stays square
-//   */
-
-//   const canvasScale = useTransform(
-//     scrollYProgress,
-//     [0, 0.65, 0.82, 1],
-//     [1, 1, 0.58, 0.58]
-//   );
-
-//   const canvasBorderRadius = useTransform(
-//     scrollYProgress,
-//     [0, 0.65, 0.82],
-//     [0, 0, 32]
-//   );
-
-//   const canvasShadowOpacity = useTransform(
-//     scrollYProgress,
-//     [0.65, 0.82],
-//     [0, 0.45]
-//   );
-
-//   const canvasBorderOpacity = useTransform(
-//     scrollYProgress,
-//     [0.65, 0.82],
-//     [0, 1]
-//   );
-
-//   // ============================================================
-//   // RESIZE CANVAS
-//   // ============================================================
-
-//   const resizeCanvas = useCallback(() => {
-//     const canvas = canvasRef.current;
-
-//     if (!canvas) return;
-
-//     const rect = canvas.getBoundingClientRect();
-
-//     const width = Math.round(rect.width);
-//     const height = Math.round(rect.height);
-
-//     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-
-//     const previous = canvasSizeRef.current;
-
-//     if (
-//       previous.width === width &&
-//       previous.height === height &&
-//       previous.dpr === dpr
-//     ) {
-//       return;
-//     }
-
-//     canvasSizeRef.current = {
-//       width,
-//       height,
-//       dpr,
-//     };
-
-//     canvas.width = Math.round(width * dpr);
-//     canvas.height = Math.round(height * dpr);
-
-//     canvas.style.width = `${width}px`;
-//     canvas.style.height = `${height}px`;
-
-//     const ctx = ctxRef.current;
-
-//     if (!ctx) return;
-
-//     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-//     drawFrame(currentFrameRef.current);
-//   }, []);
-
-//   // ============================================================
-//   // DRAW FRAME
-//   // ============================================================
-
-//   const drawFrame = useCallback((index: number) => {
-//     const canvas = canvasRef.current;
-//     const ctx = ctxRef.current;
-//     const images = imagesRef.current;
-
-//     if (!canvas || !ctx) return;
-
-//     const img = images[index];
-
-//     if (!img || !img.complete || img.naturalWidth === 0) {
-//       return;
-//     }
-
-//     const { width, height } = canvasSizeRef.current;
-
-//     if (!width || !height) return;
-
-//     const imageAspect =
-//       img.naturalWidth / img.naturalHeight;
-
-//     const canvasAspect = width / height;
-
-//     let drawWidth: number;
-//     let drawHeight: number;
-//     let x: number;
-//     let y: number;
-
-//     // ==========================================================
-//     // OBJECT-FIT: COVER
-//     // ==========================================================
-
-//     if (imageAspect > canvasAspect) {
-//       drawHeight = height;
-//       drawWidth = height * imageAspect;
-
-//       x = (width - drawWidth) / 2;
-//       y = 0;
-//     } else {
-//       drawWidth = width;
-//       drawHeight = width / imageAspect;
-
-//       x = 0;
-//       y = (height - drawHeight) / 2;
-//     }
-
-//     ctx.clearRect(0, 0, width, height);
-
-//     ctx.drawImage(
-//       img,
-//       x,
-//       y,
-//       drawWidth,
-//       drawHeight
-//     );
-
-//     currentFrameRef.current = index;
-//   }, []);
-
-//   // ============================================================
-//   // REQUEST ANIMATION FRAME
-//   // ============================================================
-
-//   const scheduleFrame = useCallback(
-//     (index: number) => {
-//       requestedFrameRef.current = index;
-
-//       if (animationFrameRef.current !== null) {
-//         return;
-//       }
-
-//       animationFrameRef.current =
-//         requestAnimationFrame(() => {
-//           animationFrameRef.current = null;
-
-//           const frame =
-//             requestedFrameRef.current;
-
-//           if (
-//             frame === currentFrameRef.current
-//           ) {
-//             return;
-//           }
-
-//           drawFrame(frame);
-//         });
-//     },
-//     [drawFrame]
-//   );
-
-//   // ============================================================
-//   // PRELOAD IMAGES
-//   // ============================================================
-
-//   useEffect(() => {
-//     let cancelled = false;
-
-//     const preloadImages = async () => {
-//       const images: HTMLImageElement[] = [];
-
-//       for (let i = 0; i < FRAME_COUNT; i++) {
-//         const img = new Image();
-
-//         img.decoding = "async";
-
-//         img.src = getImagePath(i);
-
-//         images.push(img);
-//       }
-
-//       imagesRef.current = images;
-
-//       await Promise.all(
-//         images.map((img) => {
-//           if (img.complete) {
-//             return img
-//               .decode?.()
-//               .catch(() => {});
-//           }
-
-//           return new Promise<void>((resolve) => {
-//             img.onload = async () => {
-//               try {
-//                 await img.decode?.();
-//               } catch {}
-
-//               resolve();
-//             };
-
-//             img.onerror = () => {
-//               resolve();
-//             };
-//           });
-//         })
-//       );
-
-//       if (!cancelled) {
-//         setIsLoaded(true);
-//       }
-//     };
-
-//     preloadImages();
-
-//     return () => {
-//       cancelled = true;
-//     };
-//   }, []);
-
-//   // ============================================================
-//   // INITIALIZE CANVAS
-//   // ============================================================
-
-//   useEffect(() => {
-//     const canvas = canvasRef.current;
-
-//     if (!canvas) return;
-
-//     const ctx = canvas.getContext("2d", {
-//       alpha: false,
-//       desynchronized: true,
-//     });
-
-//     if (!ctx) return;
-
-//     ctxRef.current = ctx;
-
-//     resizeCanvas();
-
-//     const observer = new ResizeObserver(() => {
-//       resizeCanvas();
-//     });
-
-//     observer.observe(canvas);
-
-//     return () => {
-//       observer.disconnect();
-//     };
-//   }, [resizeCanvas]);
-
-//   // ============================================================
-//   // FIRST FRAME
-//   // ============================================================
-
-//   useEffect(() => {
-//     if (!isLoaded) return;
-
-//     resizeCanvas();
-
-//     drawFrame(0);
-//   }, [
-//     isLoaded,
-//     drawFrame,
-//     resizeCanvas,
-//   ]);
-
-//   // ============================================================
-//   // SCROLL → FRAME
-//   // ============================================================
-
-//   useMotionValueEvent(
-//     scrollYProgress,
-//     "change",
-//     (progress) => {
-//       if (!isLoaded) return;
-
-//       const clampedProgress =
-//         Math.max(
-//           0,
-//           Math.min(1, progress)
-//         );
-
-//       const frameIndex = Math.min(
-//         FRAME_COUNT - 1,
-//         Math.floor(
-//           clampedProgress *
-//             (FRAME_COUNT - 1)
-//         )
-//       );
-
-//       scheduleFrame(frameIndex);
-//     }
-//   );
-
-//   // ============================================================
-//   // CLEANUP
-//   // ============================================================
-
-//   useEffect(() => {
-//     return () => {
-//       if (
-//         animationFrameRef.current !== null
-//       ) {
-//         cancelAnimationFrame(
-//           animationFrameRef.current
-//         );
-//       }
-//     };
-//   }, []);
-
-//   // ============================================================
-//   // RENDER
-//   // ============================================================
-
-//   return (
-//     <div
-//       ref={containerRef}
-//       className="
-//         relative
-//         h-[500vh]
-//         bg-[#121212]
-//       "
-//     >
-//       <div
-//         className="
-//           sticky
-//           top-0
-//           h-screen
-//           w-full
-//           overflow-hidden
-//           flex
-//           items-center
-//           justify-center
-//         "
-//       >
-
-//         {/* ==================================================
-//             CINEMATIC FRAME CONTAINER
-//             ================================================== */}
-
-//         <motion.div
-//           style={{
-//             scale: canvasScale,
-//             borderRadius:
-//               canvasBorderRadius,
-//             overflow: "hidden",
-//           }}
-//           className="
-//             relative
-//             h-full
-//             w-full
-//             flex
-//             items-center
-//             justify-center
-//             will-change-transform
-//           "
-//         >
-
-//           <canvas
-//             ref={canvasRef}
-//             className="
-//               absolute
-//               inset-0
-//               block
-//               h-full
-//               w-full
-//             "
-//           />
-
-//           {/* Border */}
-//           <motion.div
-//             style={{
-//               opacity:
-//                 canvasBorderOpacity,
-//               borderRadius:
-//                 canvasBorderRadius,
-//             }}
-//             className="
-//               pointer-events-none
-//               absolute
-//               inset-0
-//               border
-//               border-white/20
-//             "
-//           />
-
-//           {/* Shadow */}
-//           <motion.div
-//             style={{
-//               opacity:
-//                 canvasShadowOpacity,
-//               borderRadius:
-//                 canvasBorderRadius,
-//             }}
-//             className="
-//               pointer-events-none
-//               absolute
-//               inset-0
-//               shadow-[0_30px_100px_rgba(0,0,0,0.6)]
-//             "
-//           />
-
-//         </motion.div>
-
-//         {/* ==================================================
-//             TEXT OVERLAY
-//             ================================================== */}
-
-//         {children}
-
-//       </div>
-//     </div>
-//   );
-// }
-
-
-
-
 "use client";
 
 import {
@@ -1098,17 +108,30 @@ export default function ScrollyCanvas({
         return;
       }
 
-      // Internal resolution
-      const dpr = Math.min(
-        window.devicePixelRatio || 1,
-        2
-      );
+      // ========================================================
+      // DEVICE
+      // ========================================================
+
+      const isMobile =
+        window.innerWidth < 768;
+
+      // ========================================================
+      // CANVAS RESOLUTION
+      // ========================================================
+
+      const dpr = isMobile
+        ? Math.min(
+            window.devicePixelRatio || 1,
+            1.5
+          )
+        : Math.min(
+            window.devicePixelRatio || 1,
+            2
+          );
 
       if (
-        canvas.width !==
-          width * dpr ||
-        canvas.height !==
-          height * dpr
+        canvas.width !== width * dpr ||
+        canvas.height !== height * dpr
       ) {
         canvas.width =
           width * dpr;
@@ -1126,6 +149,10 @@ export default function ScrollyCanvas({
         );
       }
 
+      // ========================================================
+      // IMAGE RATIO
+      // ========================================================
+
       const imageRatio =
         img.naturalWidth /
         img.naturalHeight;
@@ -1133,53 +160,237 @@ export default function ScrollyCanvas({
       const canvasRatio =
         width / height;
 
-      let drawWidth;
-      let drawHeight;
-      let x;
-      let y;
+      let drawWidth: number;
+      let drawHeight: number;
+      let x: number;
+      let y: number;
 
       // ========================================================
-      // OBJECT FIT: COVER
+      // DESKTOP
       // ========================================================
 
-      if (
-        imageRatio > canvasRatio
-      ) {
-        drawHeight = height;
+      if (!isMobile) {
+        /*
+         * Keep your original desktop
+         * cover behavior.
+         */
 
-        drawWidth =
-          height * imageRatio;
+        if (
+          imageRatio >
+          canvasRatio
+        ) {
+          drawHeight =
+            height;
 
-        x =
-          (width - drawWidth) / 2;
+          drawWidth =
+            height *
+            imageRatio;
 
-        y = 0;
-      } else {
-        drawWidth = width;
+          x =
+            (width -
+              drawWidth) /
+            2;
 
-        drawHeight =
-          width / imageRatio;
+          y = 0;
+        } else {
+          drawWidth =
+            width;
 
-        x = 0;
+          drawHeight =
+            width /
+            imageRatio;
 
-        y =
-          (height - drawHeight) / 2;
+          x = 0;
+
+          y =
+            (height -
+              drawHeight) /
+            2;
+        }
+
+        ctx.clearRect(
+          0,
+          0,
+          width,
+          height
+        );
+
+        ctx.drawImage(
+          img,
+          x,
+          y,
+          drawWidth,
+          drawHeight
+        );
       }
 
-      ctx.clearRect(
-        0,
-        0,
-        width,
-        height
-      );
+      // ========================================================
+      // MOBILE
+      // ========================================================
 
-      ctx.drawImage(
-        img,
-        x,
-        y,
-        drawWidth,
-        drawHeight
-      );
+      else {
+        /*
+         * =====================================================
+         * MOBILE CINEMATIC MODE
+         * =====================================================
+         *
+         * Main image:
+         * - 100% screen height
+         * - original aspect ratio
+         * - centered horizontally
+         *
+         * Background:
+         * - same frame
+         * - enlarged
+         * - blurred
+         * - fills entire screen
+         */
+
+        // ------------------------------------------------------
+        // 1. CLEAR
+        // ------------------------------------------------------
+
+        ctx.clearRect(
+          0,
+          0,
+          width,
+          height
+        );
+
+        // ------------------------------------------------------
+        // 2. DRAW BLURRED BACKGROUND
+        // ------------------------------------------------------
+
+        /*
+         * Background uses cover.
+         */
+
+        let bgWidth: number;
+        let bgHeight: number;
+        let bgX: number;
+        let bgY: number;
+
+        if (
+          imageRatio >
+          canvasRatio
+        ) {
+          bgHeight =
+            height;
+
+          bgWidth =
+            height *
+            imageRatio;
+
+          bgX =
+            (width -
+              bgWidth) /
+            2;
+
+          bgY = 0;
+        } else {
+          bgWidth =
+            width;
+
+          bgHeight =
+            width /
+            imageRatio;
+
+          bgX = 0;
+
+          bgY =
+            (height -
+              bgHeight) /
+            2;
+        }
+
+        /*
+         * Slight zoom on background.
+         */
+
+        const bgScale = 1.15;
+
+        bgWidth *= bgScale;
+        bgHeight *= bgScale;
+
+        bgX =
+          (width -
+            bgWidth) /
+          2;
+
+        bgY =
+          (height -
+            bgHeight) /
+          2;
+
+        /*
+         * Blur background.
+         */
+
+        ctx.save();
+
+        ctx.filter =
+          "blur(24px)";
+
+        ctx.globalAlpha = 0.45;
+
+        ctx.drawImage(
+          img,
+          bgX,
+          bgY,
+          bgWidth,
+          bgHeight
+        );
+
+        ctx.restore();
+
+        // ------------------------------------------------------
+        // 3. DRAW MAIN IMAGE
+        // ------------------------------------------------------
+
+        /*
+         * FULL HEIGHT.
+         */
+
+        drawHeight =
+          height;
+
+        drawWidth =
+          height *
+          imageRatio;
+
+        /*
+         * Center horizontally.
+         */
+
+        x =
+          (width -
+            drawWidth) /
+          2;
+
+        y = 0;
+
+        /*
+         * Draw sharp foreground.
+         */
+
+        ctx.save();
+
+        ctx.globalAlpha = 1;
+
+        ctx.drawImage(
+          img,
+          x,
+          y,
+          drawWidth,
+          drawHeight
+        );
+
+        ctx.restore();
+      }
+
+      // ========================================================
+      // CURRENT FRAME
+      // ========================================================
 
       currentFrameRef.current =
         index;
@@ -1206,6 +417,8 @@ export default function ScrollyCanvas({
     ) {
       const img =
         new Image();
+
+      img.decoding = "async";
 
       img.src =
         getImagePath(i);
@@ -1247,12 +460,16 @@ export default function ScrollyCanvas({
     const canvas =
       canvasRef.current;
 
-    if (!canvas) return;
+    if (!canvas) {
+      return;
+    }
 
     const ctx =
       canvas.getContext("2d");
 
-    if (!ctx) return;
+    if (!ctx) {
+      return;
+    }
 
     ctxRef.current = ctx;
 
@@ -1282,7 +499,9 @@ export default function ScrollyCanvas({
   // ============================================================
 
   useEffect(() => {
-    if (!isLoaded) return;
+    if (!isLoaded) {
+      return;
+    }
 
     renderFrame(0);
   }, [
@@ -1298,7 +517,9 @@ export default function ScrollyCanvas({
     scrollYProgress,
     "change",
     (latest) => {
-      if (!isLoaded) return;
+      if (!isLoaded) {
+        return;
+      }
 
       const progress =
         Math.max(
@@ -1367,6 +588,10 @@ export default function ScrollyCanvas({
           "
         >
 
+          {/* ==================================================
+              CANVAS
+              ================================================== */}
+
           <canvas
             ref={canvasRef}
             className="
@@ -1378,7 +603,9 @@ export default function ScrollyCanvas({
             "
           />
 
-          {/* BORDER */}
+          {/* ==================================================
+              BORDER
+              ================================================== */}
 
           <motion.div
             style={{
