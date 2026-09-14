@@ -243,7 +243,7 @@ export default function Overlay() {
       <Scene
         progress={time}
         start={1.35}
-        end={2}
+        end={1.9}
         enterX={-70}
         enterY={25}
         className="
@@ -310,8 +310,8 @@ export default function Overlay() {
 
       <Scene
         progress={time}
-        start={2}
-        end={2.3}
+        start={1.9}
+        end={2.1}
         enterX={70}
         enterY={-30}
         className="
@@ -357,13 +357,48 @@ export default function Overlay() {
         </div>
       </Scene>
 
+      <Scene
+        progress={time}
+        start={2.1}
+        end={2.7}
+        enterX={0}
+        enterY={80}
+        scaleFrom={0.92}
+        className="
+          flex
+          items-center
+          justify-center
+          px-6
+          text-center
+        "
+      >
+         <div>
+          <h2
+            className="
+              mt-6
+              font-serif
+              text-[11vw]
+              font-light
+              bold
+              leading-[0.72]
+              tracking-[-0.08em]
+              md:text-[4vw]
+              absolute bottom-11 left-1/2 -translate-x-1/2 -translate-y-1/2
+            "
+          >
+              
+          </h2>  
+        </div>
+
+      </Scene>
+
       {/* =====================================================
           05 — CODE
           ===================================================== */}
 
       <Scene
         progress={time}
-        start={2.8}
+        start={2.7}
         end={3.3}
         enterX={0}
         enterY={80}
