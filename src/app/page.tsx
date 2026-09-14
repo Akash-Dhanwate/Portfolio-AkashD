@@ -1,3 +1,4 @@
+import HomeIntro from "@/components/HomeIntro";
 import Navigation from "@/components/Navigation";
 import ScrollyCanvas from "@/components/ScrollyCanvas";
 import Overlay from "@/components/Overlay";
@@ -11,6 +12,7 @@ export default function Home() {
     <main className="min-h-screen bg-[#121212] selection:bg-white selection:text-black">
       <Navigation />
       <div id="home">
+      <HomeIntro/>
         <ScrollyCanvas>
           <Overlay />
         </ScrollyCanvas>

@@ -97,8 +97,10 @@ export default function Overlay() {
     [0.76, 0.88],
     [50, 0]
   );
+  
 
   return (
+    
     <div
       className="
         pointer-events-none
