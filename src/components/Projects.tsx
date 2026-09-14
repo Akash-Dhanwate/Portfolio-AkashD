@@ -1,4 +1,3 @@
-
 "use client";
 
 import { motion } from "framer-motion";
@@ -15,11 +14,8 @@ const PROJECTS = [
     status: "Building",
     technologies: ["Next.js", "TypeScript", "Python", "AI"],
 
-    // If video exists, video will be shown first
     video: "",
-
-    // Used when video is not available
-    image: "./images/image.png",
+    image: "/images/image.png",
 
     github: "#",
     live: "#",
@@ -36,7 +32,7 @@ const PROJECTS = [
     technologies: ["Next.js", "Python", "AI", "Scraping"],
 
     video: "",
-    image: "./images/image.png",
+    image: "/images/image.png",
 
     github: "#",
     live: "#",
@@ -53,7 +49,7 @@ const PROJECTS = [
     technologies: ["Next.js", "TypeScript", "Framer Motion"],
 
     video: "",
-    image: "./images/image.png",
+    image: "/images/image.png",
 
     github: "#",
     live: "#",
@@ -69,9 +65,8 @@ const PROJECTS = [
     status: "Completed",
     technologies: ["Java", "OOP", "Data Structures"],
 
-    // No video and no image = automatic dark background
     video: "",
-    image: "./images/image.png",
+    image: "/images/image.png",
 
     github: "#",
     live: "#",
@@ -80,7 +75,21 @@ const PROJECTS = [
 
 export default function Projects() {
   return (
-    <section className="relative min-h-screen bg-[#121212] text-white py-28 px-6 md:px-12 overflow-hidden">
+    <section
+      className="
+        relative
+        min-h-screen
+        bg-[#121212]
+        text-white
+        py-20
+        sm:py-24
+        md:py-28
+        px-4
+        sm:px-6
+        md:px-12
+        overflow-hidden
+      "
+    >
       <div className="max-w-7xl mx-auto">
 
         {/* =========================================
@@ -88,26 +97,75 @@ export default function Projects() {
         ========================================= */}
 
         <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={{
+            opacity: 0,
+            y: 25,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+          }}
           transition={{
             duration: 0.6,
             ease: [0.16, 1, 0.3, 1],
           }}
-          className="mb-16"
+          className="
+            mb-10
+            sm:mb-14
+            md:mb-16
+          "
         >
-          <p className="text-xs uppercase tracking-[0.5em] text-white/30 mb-6">
+          <p
+            className="
+              text-[9px]
+              sm:text-[10px]
+              md:text-xs
+              uppercase
+              tracking-[0.35em]
+              sm:tracking-[0.45em]
+              md:tracking-[0.5em]
+              text-white/30
+              mb-4
+              sm:mb-5
+              md:mb-6
+            "
+          >
             02 — Selected Work
           </p>
 
-          <h2 className="text-6xl md:text-8xl font-black tracking-[-0.06em] leading-[0.85]">
+          <h2
+            className="
+              text-[3.2rem]
+              sm:text-6xl
+              md:text-8xl
+              font-black
+              tracking-[-0.06em]
+              leading-[0.85]
+            "
+          >
             THINGS
             <br />
-            <span className="text-white/20">I BUILD.</span>
+            <span className="text-white/20">
+              I BUILD.
+            </span>
           </h2>
 
-          <p className="mt-8 max-w-xl text-base md:text-lg leading-relaxed text-white/40">
+          <p
+            className="
+              mt-5
+              sm:mt-7
+              md:mt-8
+              max-w-xl
+              text-sm
+              sm:text-base
+              md:text-lg
+              leading-relaxed
+              text-white/40
+            "
+          >
             A collection of software projects, experiments, and ideas
             turned into working products.
           </p>
@@ -118,7 +176,15 @@ export default function Projects() {
             PROJECT GRID
         ========================================= */}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div
+          className="
+            grid
+            grid-cols-1
+            md:grid-cols-2
+            gap-4
+            sm:gap-5
+          "
+        >
 
           {PROJECTS.map((project, index) => (
             <motion.article
@@ -152,7 +218,8 @@ export default function Projects() {
               className="
                 group
                 relative
-                h-[330px]
+                h-[370px]
+                sm:h-[350px]
                 md:h-[350px]
                 rounded-xl
                 border
@@ -228,8 +295,6 @@ export default function Projects() {
 
               {/* =========================================
                   BOTTOM DARK GRADIENT
-
-                  Keeps lower content readable
               ========================================= */}
 
               <div
@@ -246,17 +311,17 @@ export default function Projects() {
 
               {/* =========================================
                   GLASS CONTENT AREA
-
-                  This creates the glass effect behind
-                  the project information.
               ========================================= */}
 
               <div
                 className="
                   absolute
-                  inset-x-3
-                  bottom-3
-                  top-20
+                  inset-x-2
+                  sm:inset-x-3
+                  bottom-2
+                  sm:bottom-3
+                  top-16
+                  sm:top-20
                   rounded-lg
                   bg-black/20
                   backdrop-blur-md
@@ -274,20 +339,74 @@ export default function Projects() {
                   TOP PROJECT INFORMATION
               ========================================= */}
 
-              <div className="relative z-10 flex items-center justify-between p-6">
+              <div
+                className="
+                  relative
+                  z-10
+                  flex
+                  items-center
+                  justify-between
+                  gap-3
+                  p-4
+                  sm:p-5
+                  md:p-6
+                "
+              >
 
-                <div className="flex items-center gap-3">
+                <div
+                  className="
+                    flex
+                    min-w-0
+                    items-center
+                    gap-2
+                    sm:gap-3
+                  "
+                >
 
                   {/* PROJECT NUMBER */}
-                  <span className="text-xs font-mono text-white/50">
+
+                  <span
+                    className="
+                      shrink-0
+                      text-[10px]
+                      sm:text-xs
+                      font-mono
+                      text-white/50
+                    "
+                  >
                     {project.id}
                   </span>
 
+
                   {/* DIVIDER */}
-                  <span className="h-px w-6 bg-white/30" />
+
+                  <span
+                    className="
+                      h-px
+                      w-4
+                      sm:w-6
+                      shrink-0
+                      bg-white/30
+                    "
+                  />
+
 
                   {/* CATEGORY */}
-                  <span className="text-[10px] font-mono tracking-[0.2em] text-white/50">
+
+                  <span
+                    className="
+                      min-w-0
+                      truncate
+                      text-[8px]
+                      sm:text-[9px]
+                      md:text-[10px]
+                      font-mono
+                      tracking-[0.12em]
+                      sm:tracking-[0.18em]
+                      md:tracking-[0.2em]
+                      text-white/50
+                    "
+                  >
                     {project.category}
                   </span>
 
@@ -295,8 +414,9 @@ export default function Projects() {
 
 
                 {/* STATUS */}
+
                 <span
-                  className={`text-[10px] font-mono uppercase tracking-wider ${
+                  className={`shrink-0 text-[8px] sm:text-[9px] md:text-[10px] font-mono uppercase tracking-wider ${
                     project.status === "Live"
                       ? "text-white/80"
                       : "text-white/40"
@@ -317,10 +437,13 @@ export default function Projects() {
                   relative
                   z-10
                   flex
-                  h-[calc(100%-76px)]
+                  h-[calc(100%-68px)]
+                  sm:h-[calc(100%-76px)]
                   flex-col
                   justify-between
-                  p-6
+                  p-4
+                  sm:p-5
+                  md:p-6
                 "
               >
 
@@ -332,7 +455,8 @@ export default function Projects() {
 
                   <h3
                     className="
-                      text-3xl
+                      text-[1.65rem]
+                      sm:text-3xl
                       md:text-4xl
                       font-bold
                       tracking-[-0.04em]
@@ -354,9 +478,11 @@ export default function Projects() {
 
                   <p
                     className="
-                      mt-4
+                      mt-3
+                      sm:mt-4
                       max-w-md
-                      text-sm
+                      text-[12px]
+                      sm:text-sm
                       leading-relaxed
                       text-white/60
                       drop-shadow-md
@@ -370,8 +496,16 @@ export default function Projects() {
                       TECHNOLOGIES
                   ===================================== */}
 
-                  <div className="flex flex-wrap gap-2 mt-5">
-
+                  <div
+                    className="
+                      flex
+                      flex-wrap
+                      gap-1.5
+                      sm:gap-2
+                      mt-4
+                      sm:mt-5
+                    "
+                  >
                     {project.technologies.map((tech) => (
                       <span
                         key={tech}
@@ -381,9 +515,11 @@ export default function Projects() {
                           border-white/20
                           bg-black/20
                           backdrop-blur-sm
-                          px-2.5
+                          px-2
+                          sm:px-2.5
                           py-1
-                          text-[10px]
+                          text-[9px]
+                          sm:text-[10px]
                           font-mono
                           text-white/60
                           transition-all
@@ -395,7 +531,6 @@ export default function Projects() {
                         {tech}
                       </span>
                     ))}
-
                   </div>
 
                 </div>
@@ -405,11 +540,25 @@ export default function Projects() {
                     BOTTOM AREA
                 ========================================= */}
 
-                <div className="flex items-center justify-between">
+                <div
+                  className="
+                    flex
+                    items-center
+                    justify-between
+                    gap-3
+                  "
+                >
 
                   {/* YEAR */}
 
-                  <span className="text-xs font-mono text-white/40">
+                  <span
+                    className="
+                      text-[10px]
+                      sm:text-xs
+                      font-mono
+                      text-white/40
+                    "
+                  >
                     {project.year}
                   </span>
 
@@ -418,11 +567,16 @@ export default function Projects() {
                       BUTTONS
                   ===================================== */}
 
-                  <div className="flex items-center gap-2">
+                  <div
+                    className="
+                      flex
+                      items-center
+                      gap-1.5
+                      sm:gap-2
+                    "
+                  >
 
-                    {/* =================================
-                        GITHUB BUTTON
-                    ================================= */}
+                    {/* GITHUB */}
 
                     <a
                       href={project.github}
@@ -431,8 +585,10 @@ export default function Projects() {
                       aria-label={`${project.title} GitHub`}
                       className="
                         flex
-                        h-10
-                        w-10
+                        h-9
+                        w-9
+                        sm:h-10
+                        sm:w-10
                         items-center
                         justify-center
                         rounded-full
@@ -450,12 +606,10 @@ export default function Projects() {
                       "
                     >
 
-                      {/* GitHub SVG */}
-
                       <svg
                         viewBox="0 0 24 24"
-                        width="17"
-                        height="17"
+                        width="16"
+                        height="16"
                         fill="currentColor"
                         aria-hidden="true"
                       >
@@ -465,9 +619,7 @@ export default function Projects() {
                     </a>
 
 
-                    {/* =================================
-                        LIVE PROJECT BUTTON
-                    ================================= */}
+                    {/* LIVE PROJECT */}
 
                     <a
                       href={project.live}
@@ -476,8 +628,10 @@ export default function Projects() {
                       aria-label={`Open ${project.title}`}
                       className="
                         flex
-                        h-10
-                        w-10
+                        h-9
+                        w-9
+                        sm:h-10
+                        sm:w-10
                         items-center
                         justify-center
                         rounded-full
@@ -490,7 +644,7 @@ export default function Projects() {
                       "
                     >
                       <ArrowUpRight
-                        size={18}
+                        size={16}
                         strokeWidth={2}
                       />
                     </a>
@@ -530,13 +684,42 @@ export default function Projects() {
             SECTION FOOTER
         ========================================= */}
 
-        <div className="flex items-center justify-between mt-10">
+        <div
+          className="
+            flex
+            items-center
+            justify-between
+            gap-4
+            mt-7
+            sm:mt-8
+            md:mt-10
+          "
+        >
 
-          <p className="text-[10px] uppercase tracking-[0.4em] text-white/20">
+          <p
+            className="
+              text-[8px]
+              sm:text-[9px]
+              md:text-[10px]
+              uppercase
+              tracking-[0.25em]
+              sm:tracking-[0.35em]
+              md:tracking-[0.4em]
+              text-white/20
+            "
+          >
             More experiments coming
           </p>
 
-          <span className="text-xs font-mono text-white/20">
+          <span
+            className="
+              shrink-0
+              text-[10px]
+              sm:text-xs
+              font-mono
+              text-white/20
+            "
+          >
             {PROJECTS.length.toString().padStart(2, "0")} PROJECTS
           </span>
 

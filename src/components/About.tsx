@@ -330,13 +330,6 @@
 
 
 
-
-
-
-
-
-
-
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -357,65 +350,65 @@ export default function About() {
   // I'M A
   const y1 = useTransform(
     scrollYProgress,
-    [0.00, 0.08],
-    [100, 0]
+    [0.00, 0.06],
+    [70, 0]
   );
 
   const opacity1 = useTransform(
     scrollYProgress,
-    [0.00, 0.05],
+    [0.00, 0.04],
     [0, 1]
   );
 
   // B.TECH
   const x2 = useTransform(
     scrollYProgress,
-    [0.07, 0.15],
-    [100, 0]
+    [0.055, 0.12],
+    [70, 0]
   );
 
   const opacity2 = useTransform(
     scrollYProgress,
-    [0.07, 0.12],
+    [0.055, 0.10],
     [0, 1]
   );
 
   // COMPUTER
   const y3 = useTransform(
     scrollYProgress,
-    [0.14, 0.22],
-    [100, 0]
+    [0.115, 0.18],
+    [70, 0]
   );
 
   const opacity3 = useTransform(
     scrollYProgress,
-    [0.14, 0.19],
+    [0.115, 0.16],
     [0, 1]
   );
 
   // ENGINEERING
   const x4 = useTransform(
     scrollYProgress,
-    [0.21, 0.30],
-    [-100, 0]
+    [0.175, 0.245],
+    [-70, 0]
   );
 
   const opacity4 = useTransform(
     scrollYProgress,
-    [0.21, 0.27],
+    [0.175, 0.225],
     [0, 1]
   );
 
   // STUDENT
   const scale5 = useTransform(
     scrollYProgress,
-    [0.29, 0.38],
-    [0.75, 1]
+    [0.235, 0.30],
+    [0.8, 1]
   );
 
   const opacity5 = useTransform(
     scrollYProgress,
-    [0.29, 0.35],
+    [0.235, 0.275],
     [0, 1]
   );
 
@@ -426,41 +419,67 @@ export default function About() {
   // TURNING
   const secondY1 = useTransform(
     scrollYProgress,
-    [0.40, 0.48],
-    [70, 0]
+    [0.32, 0.38],
+    [45, 0]
   );
 
   const secondOpacity1 = useTransform(
     scrollYProgress,
-    [0.40, 0.45],
+    [0.32, 0.36],
     [0, 1]
   );
 
   // IDEAS INTO
   const secondY2 = useTransform(
     scrollYProgress,
-    [0.47, 0.55],
-    [70, 0]
+    [0.37, 0.43],
+    [45, 0]
   );
 
   const secondOpacity2 = useTransform(
     scrollYProgress,
-    [0.47, 0.52],
+    [0.37, 0.41],
     [0, 1]
   );
 
   // REAL SOFTWARE
   const secondY3 = useTransform(
     scrollYProgress,
-    [0.54, 0.62],
-    [70, 0]
+    [0.42, 0.48],
+    [45, 0]
   );
 
   const secondOpacity3 = useTransform(
     scrollYProgress,
-    [0.54, 0.59],
+    [0.42, 0.46],
     [0, 1]
   );
+
+  // --------------------------------
+  // RESPONSIVE TYPOGRAPHY
+  // --------------------------------
+
+  const mainHeadingClass = `
+    text-[clamp(1.85rem,7vw,7rem)]
+    leading-[0.85]
+    font-black
+    tracking-[-0.06em]
+    whitespace-nowrap
+  `;
+
+  const secondHeadingClass = `
+    text-[clamp(1.7rem,6.5vw,7rem)]
+    leading-[0.88]
+    font-black
+    tracking-[-0.06em]
+    text-white
+    whitespace-nowrap
+  `;
+
+  const bodyTextClass = `
+    text-[clamp(0.9rem,1.35vw,1.25rem)]
+    leading-[1.7]
+  `;
 
   return (
     <section
@@ -468,21 +487,46 @@ export default function About() {
       className="
         relative
         min-h-[220vh]
+        w-full
+        overflow-hidden
         bg-[#121212]
         text-white
-        px-6
-        md:px-12
-        overflow-hidden
+        px-[clamp(1rem,4vw,3rem)]
       "
     >
-      <div className="sticky top-0 min-h-screen flex items-center overflow-hidden">
-        <div className="max-w-7xl w-full mx-auto py-20">
+      <div
+        className="
+          sticky
+          top-0
+          flex
+          min-h-screen
+          w-full
+          items-center
+          overflow-hidden
+        "
+      >
+        <div
+          className="
+            mx-auto
+            w-full
+            max-w-7xl
+            py-[clamp(3rem,6vw,5rem)]
+          "
+        >
 
           {/* -------------------------------- */}
           {/* SECTION LABEL */}
           {/* -------------------------------- */}
 
-          <p className="mb-12 text-xs uppercase tracking-[0.5em] text-white/40">
+          <p
+            className="
+              mb-[clamp(1.75rem,4vw,3rem)]
+              text-[clamp(0.6rem,0.75vw,0.75rem)]
+              uppercase
+              tracking-[clamp(0.25em,0.5vw,0.5em)]
+              text-white/40
+            "
+          >
             01 — About Me
           </p>
 
@@ -490,55 +534,49 @@ export default function About() {
           {/* FIRST BIG STATEMENT */}
           {/* -------------------------------- */}
 
-          <div className="space-y-1">
+          <div
+            className="
+              space-y-[clamp(0.1rem,0.2vw,0.25rem)]
+            "
+          >
+
+            {/* I'M A */}
 
             <motion.h2
               style={{
                 y: y1,
                 opacity: opacity1,
               }}
-              className="
-                text-[9vw]
-                md:text-[7vw]
-                leading-[0.85]
-                font-black
-                tracking-[-0.06em]
-              "
+              className={mainHeadingClass}
             >
               I'M A
             </motion.h2>
+
+            {/* B.TECH */}
 
             <motion.h2
               style={{
                 x: x2,
                 opacity: opacity2,
               }}
-              className="
-                text-[9vw]
-                md:text-[7vw]
-                leading-[0.85]
-                font-black
-                tracking-[-0.06em]
-              "
+              className={mainHeadingClass}
             >
               B.TECH
             </motion.h2>
+
+            {/* COMPUTER */}
 
             <motion.h2
               style={{
                 y: y3,
                 opacity: opacity3,
               }}
-              className="
-                text-[9vw]
-                md:text-[7vw]
-                leading-[0.85]
-                font-black
-                tracking-[-0.06em]
-              "
+              className={mainHeadingClass}
             >
               COMPUTER
             </motion.h2>
+
+            {/* ENGINEERING */}
 
             <motion.h2
               style={{
@@ -546,28 +584,24 @@ export default function About() {
                 opacity: opacity4,
               }}
               className="
-                text-[9vw]
-                md:text-[7vw]
+                text-[clamp(1.4rem,5.5vw,5.5rem)]
                 leading-[0.85]
                 font-black
                 tracking-[-0.06em]
+                whitespace-nowrap
               "
             >
               ENGINEERING
             </motion.h2>
+
+            {/* STUDENT */}
 
             <motion.h2
               style={{
                 scale: scale5,
                 opacity: opacity5,
               }}
-              className="
-                text-[9vw]
-                md:text-[7vw]
-                leading-[0.85]
-                font-black
-                tracking-[-0.06em]
-              "
+              className={mainHeadingClass}
             >
               STUDENT.
             </motion.h2>
@@ -578,41 +612,38 @@ export default function About() {
           {/* SECOND STATEMENT */}
           {/* -------------------------------- */}
 
-          <div className="mt-32 space-y-1">
+          <div
+            className="
+              mt-[clamp(3.5rem,9vw,8rem)]
+              space-y-[clamp(0.1rem,0.2vw,0.25rem)]
+            "
+          >
+
+            {/* TURNING */}
 
             <motion.h2
               style={{
                 y: secondY1,
                 opacity: secondOpacity1,
               }}
-              className="
-                text-[8vw]
-                md:text-[7vw]
-                leading-[0.88]
-                font-black
-                tracking-[-0.06em]
-                text-white
-              "
+              className={secondHeadingClass}
             >
               TURNING
             </motion.h2>
+
+            {/* IDEAS INTO */}
 
             <motion.h2
               style={{
                 y: secondY2,
                 opacity: secondOpacity2,
               }}
-              className="
-                text-[8vw]
-                md:text-[7vw]
-                leading-[0.88]
-                font-black
-                tracking-[-0.06em]
-                text-white
-              "
+              className={secondHeadingClass}
             >
               IDEAS INTO
             </motion.h2>
+
+            {/* REAL SOFTWARE */}
 
             <motion.h2
               style={{
@@ -620,8 +651,7 @@ export default function About() {
                 opacity: secondOpacity3,
               }}
               className="
-                text-[8vw]
-                md:text-[7vw]
+                text-[clamp(1.65rem,6.5vw,7rem)]
                 leading-[0.88]
                 font-black
                 tracking-[-0.06em]
@@ -631,6 +661,7 @@ export default function About() {
                 from-neutral-400
                 via-white
                 to-neutral-500
+                whitespace-nowrap
               "
             >
               REAL SOFTWARE.
@@ -656,24 +687,40 @@ export default function About() {
               margin: "-100px",
             }}
             transition={{
-              duration: 0.9,
-              delay: 0.2,
+              duration: 0.7,
+              delay: 0.1,
               ease: [0.16, 1, 0.3, 1],
             }}
-            className="mt-24 max-w-2xl font-mono"
+            className="
+              mt-[clamp(2.5rem,6vw,6rem)]
+              w-full
+              max-w-2xl
+              font-mono
+            "
           >
-            <p className="text-lg md:text-xl leading-relaxed text-white/60">
+
+            <p
+              className={`
+                ${bodyTextClass}
+                text-white/60
+              `}
+            >
               I'm currently pursuing my{" "}
               <span className="font-bold text-white">
                 B.Tech
               </span>{" "}
-              in Computer Engineering and I'm passionate about turning
-              ideas into useful software.
+              in Computer Engineering and I'm passionate
+              about turning ideas into useful software.
             </p>
 
-            <br />
+            <div className="h-[clamp(1rem,2.5vw,2rem)]" />
 
-            <p className="text-lg md:text-xl leading-relaxed text-white/50">
+            <p
+              className={`
+                ${bodyTextClass}
+                text-white/50
+              `}
+            >
               I enjoy taking ideas from concept to reality
               <br />
               breaking problems down,
@@ -685,16 +732,31 @@ export default function About() {
               useful digital experiences along the way.
             </p>
 
-            <p className="mt-6 text-lg md:text-xl leading-relaxed text-white/50">
-              I'm constantly learning, experimenting with new technologies,
-              exploring AI, and building projects that push me to think
-              beyond just writing code.
+            <p
+              className={`
+                mt-[clamp(1rem,2vw,1.5rem)]
+                ${bodyTextClass}
+                text-white/50
+              `}
+            >
+              I'm constantly learning, experimenting with
+              new technologies, exploring AI, and building
+              projects that push me to think beyond just
+              writing code.
             </p>
 
-            <p className="mt-6 text-lg md:text-xl leading-relaxed text-white/50">
-              For me, every idea is an opportunity to build, every bug is
-              a lesson, and every project is a chance to improve.
+            <p
+              className={`
+                mt-[clamp(1rem,2vw,1.5rem)]
+                ${bodyTextClass}
+                text-white/50
+              `}
+            >
+              For me, every idea is an opportunity to build,
+              every bug is a lesson, and every project is a
+              chance to improve.
             </p>
+
           </motion.div>
 
           {/* -------------------------------- */}
@@ -715,20 +777,48 @@ export default function About() {
               margin: "-100px",
             }}
             transition={{
-              duration: 0.8,
+              duration: 0.7,
             }}
-            className="mt-32 border-t border-white/10 pt-8"
+            className="
+              mt-[clamp(3.5rem,9vw,8rem)]
+              border-t
+              border-white/10
+              pt-[clamp(1.5rem,3vw,2rem)]
+            "
           >
-            <p className="text-xs uppercase tracking-[0.4em] text-white/30">
+
+            <p
+              className="
+                text-[clamp(0.6rem,0.75vw,0.75rem)]
+                uppercase
+                tracking-[clamp(0.2em,0.4vw,0.4em)]
+                text-white/30
+              "
+            >
               My mindset
             </p>
 
-            <p className="mt-6 text-3xl md:text-5xl font-bold tracking-tight">
+            <p
+              className="
+                mt-[clamp(1rem,2vw,1.5rem)]
+                text-[clamp(1.5rem,3.5vw,3rem)]
+                leading-tight
+                font-bold
+                tracking-tight
+              "
+            >
               Learn.
-              <span className="text-white/30"> Build.</span>
-              <span className="text-white/20"> Break.</span>
-              <span className="text-white/10"> Improve.</span>
+              <span className="text-white/30">
+                {" "}Build.
+              </span>
+              <span className="text-white/20">
+                {" "}Break.
+              </span>
+              <span className="text-white/10">
+                {" "}Improve.
+              </span>
             </p>
+
           </motion.div>
 
         </div>

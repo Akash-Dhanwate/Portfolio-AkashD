@@ -97,10 +97,8 @@ export default function Overlay() {
     [0.76, 0.88],
     [50, 0]
   );
-  
 
   return (
-    
     <div
       className="
         pointer-events-none
@@ -134,11 +132,18 @@ export default function Overlay() {
             className="
               mb-5
               font-mono
-              text-[10px]
+              text-[7px]
+              sm:text-[8px]
+              md:text-[10px]
               uppercase
-              tracking-[0.6em]
+              tracking-[0.4em]
+              sm:tracking-[0.5em]
+              md:tracking-[0.6em]
               text-white/40
-              absolute top-48 left-20
+              absolute
+              top-48
+              left-20
+              whitespace-nowrap
             "
           >
             00 / 01 — INTRODUCING
@@ -147,34 +152,41 @@ export default function Overlay() {
           <h1
             className="
               font-serif
-              text-[17vw]
+              text-[10vw]
+              sm:text-[14vw]
+              md:text-[12vw]
               font-light
               italic
               leading-[0.7]
               tracking-[-0.08em]
-              md:text-[12vw]
-              absolute top-60 left-20
+              absolute
+              top-60
+              left-20
+              whitespace-nowrap
             "
           >
             Akash
           </h1>
+
           <h1
             className="
               font-serif
-              text-[17vw]
-              font-light
-              leading
-              tracking-[-0.08em]
+              text-[3.2vw]
+              sm:text-[3.6vw]
               md:text-[4vw]
-              absolute top-99 left-20
-              margin-2px
+              font-light
+              leading-none
+              tracking-[-0.08em]
+              absolute
+              top-99
+              left-20
+              whitespace-nowrap
             "
-            >
-              Software Engineer
-            </h1>
+          >
+            Software Engineer
+          </h1>
 
-          <div className="mt-7 flex items-center justify-center gap-4">
-          </div>
+          <div className="mt-7 flex items-center justify-center gap-4" />
         </div>
       </Scene>
 
@@ -202,9 +214,13 @@ export default function Overlay() {
           <p
             className="
               font-mono
-              text-[10px]
+              text-[7px]
+              sm:text-[8px]
+              md:text-[10px]
               uppercase
-              tracking-[0.55em]
+              tracking-[0.4em]
+              sm:tracking-[0.5em]
+              md:tracking-[0.55em]
               text-white/30
             "
           >
@@ -215,20 +231,25 @@ export default function Overlay() {
             className="
               mt-5
               font-serif
-              text-[9vw]
+              text-[7vw]
+              sm:text-[8vw]
+              md:text-[7vw]
               font-light
               italic
               leading-[0.75]
               tracking-[-0.08em]
-              md:text-[7vw]
             "
           >
             Curious
             <br />
-            <span 
-            className="
-            mr-[1em]
-            absolute right-10 top-50"
+
+            <span
+              className="
+                mr-[1em]
+                absolute
+                right-10
+                top-50
+              "
             >
               by nature.
             </span>
@@ -258,9 +279,13 @@ export default function Overlay() {
             className="
               mb-5
               font-mono
-              text-[9px]
+              text-[7px]
+              sm:text-[8px]
+              md:text-[9px]
               uppercase
-              tracking-[0.55em]
+              tracking-[0.4em]
+              sm:tracking-[0.5em]
+              md:tracking-[0.55em]
               text-white/30
             "
           >
@@ -270,17 +295,21 @@ export default function Overlay() {
           <h2
             className="
               font-sans
-              text-[10vw]
+              text-[7vw]
+              sm:text-[8vw]
+              md:text-[8vw]
               font-black
               uppercase
               leading-[0.72]
               tracking-[-0.09em]
-              md:text-[8vw]
-              absolute left-10 bottom-30
+              absolute
+              left-10
+              bottom-30
             "
           >
             Always
             <br />
+
             <span className="text-white/35">
               learning.
             </span>
@@ -290,16 +319,26 @@ export default function Overlay() {
             className="
               mt-5
               font-serif
-              text-[3vw]
+              text-[2vw]
+              sm:text-[2.5vw]
+              md:text-[3vw]
               font-light
               italic
-              leading
+              leading-none
               tracking-[-0.08em]
-              md:text-[3vw]
-              absolute left-10 bottom-24
+              absolute
+              left-10
+              bottom-24
+              whitespace-nowrap
             "
           >
-            <span className="text-c" >Curiosity</span> →  <span className="text-r" >Capability . </span> 
+            <span className="text-c">
+              Curiosity
+            </span>{" "}
+            →{" "}
+            <span className="text-r">
+              Capability .
+            </span>
           </h1>
         </div>
       </Scene>
@@ -328,9 +367,13 @@ export default function Overlay() {
             className="
               mb-5
               font-mono
-              text-[9px]
+              text-[7px]
+              sm:text-[8px]
+              md:text-[9px]
               uppercase
-              tracking-[0.55em]
+              tracking-[0.4em]
+              sm:tracking-[0.5em]
+              md:tracking-[0.55em]
               text-white/30
             "
           >
@@ -340,22 +383,28 @@ export default function Overlay() {
           <h2
             className="
               font-sans
-              text-[10vw]
+              text-[7vw]
+              sm:text-[8vw]
+              md:text-[8vw]
               font-black
               uppercase
               leading-[0.72]
               tracking-[-0.09em]
-              md:text-[8vw]
             "
           >
             Always
             <br />
+
             <span className="text-white/35">
               building.
             </span>
           </h2>
         </div>
       </Scene>
+
+      {/* =====================================================
+          EMPTY SCENE
+          ===================================================== */}
 
       <Scene
         progress={time}
@@ -372,24 +421,24 @@ export default function Overlay() {
           text-center
         "
       >
-         <div>
+        <div>
           <h2
             className="
               mt-6
               font-serif
-              text-[11vw]
+              text-[8vw]
+              md:text-[4vw]
               font-light
-              bold
               leading-[0.72]
               tracking-[-0.08em]
-              md:text-[4vw]
-              absolute bottom-11 left-1/2 -translate-x-1/2 -translate-y-1/2
+              absolute
+              bottom-11
+              left-1/2
+              -translate-x-1/2
+              -translate-y-1/2
             "
-          >
-              
-          </h2>  
+          />
         </div>
-
       </Scene>
 
       {/* =====================================================
@@ -416,17 +465,26 @@ export default function Overlay() {
             className="
               mt-6
               font-serif
-              text-[11vw]
+              text-[5vw]
+              sm:text-[6vw]
+              md:text-[4vw]
               font-light
-              bold
               leading-[0.72]
               tracking-[-0.08em]
-              md:text-[4vw]
-              absolute bottom-11 left-1/2 -translate-x-1/2 -translate-y-1/2
+              absolute
+              bottom-11
+              left-1/2
+              -translate-x-1/2
+              -translate-y-1/2
+              whitespace-nowrap
             "
           >
-            I don't just write <span className="text-c" >Code</span>.
-          </h2>  
+            I don't just write{" "}
+            <span className="text-c">
+              Code
+            </span>
+            .
+          </h2>
         </div>
       </Scene>
 
@@ -453,11 +511,20 @@ export default function Overlay() {
             className="
               mb-8
               font-mono
-              text-[9px]
+              text-[7px]
+              sm:text-[8px]
+              md:text-[9px]
               uppercase
-              tracking-[0.6em]
+              tracking-[0.4em]
+              sm:tracking-[0.5em]
+              md:tracking-[0.6em]
               text-white/30
-              absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+              absolute
+              top-1/2
+              left-1/2
+              -translate-x-1/2
+              -translate-y-1/2
+              whitespace-nowrap
             "
           >
             THE PROCESS
@@ -466,12 +533,13 @@ export default function Overlay() {
           <h2
             className="
               font-serif
-              text-[10vw]
+              text-[8vw]
+              sm:text-[9vw]
+              md:text-[8vw]
               font-light
               italic
               leading-[0.7]
               tracking-[-0.09em]
-              md:text-[8vw]
             "
           >
             Think.
@@ -519,9 +587,13 @@ export default function Overlay() {
             className="
               mb-5
               font-mono
-              text-[9px]
+              text-[7px]
+              sm:text-[8px]
+              md:text-[9px]
               uppercase
-              tracking-[0.55em]
+              tracking-[0.4em]
+              sm:tracking-[0.5em]
+              md:tracking-[0.55em]
               text-white/30
             "
           >
@@ -531,15 +603,17 @@ export default function Overlay() {
           <h2
             className="
               font-serif
-              text-[10vw]
+              text-[7vw]
+              sm:text-[8vw]
+              md:text-[7vw]
               font-light
               leading-[0.72]
               tracking-[-0.08em]
-              md:text-[7vw]
             "
           >
             Make it
             <br />
+
             <span className="italic text-white/40">
               better.
             </span>
@@ -573,10 +647,15 @@ export default function Overlay() {
           <p
             className="
               font-mono
-              text-[9px]
+              text-[7px]
+              sm:text-[8px]
+              md:text-[9px]
               uppercase
-              tracking-[0.5em]
+              tracking-[0.4em]
+              sm:tracking-[0.45em]
+              md:tracking-[0.5em]
               text-white/35
+              whitespace-nowrap
             "
           >
             AKASH / 2026
@@ -596,10 +675,15 @@ export default function Overlay() {
           <p
             className="
               font-mono
-              text-[9px]
+              text-[7px]
+              sm:text-[8px]
+              md:text-[9px]
               uppercase
-              tracking-[0.45em]
+              tracking-[0.35em]
+              sm:tracking-[0.4em]
+              md:tracking-[0.45em]
               text-white/35
+              whitespace-nowrap
             "
           >
             01 — 08
@@ -671,10 +755,15 @@ export default function Overlay() {
             className="
               mb-4
               font-mono
-              text-[9px]
+              text-[7px]
+              sm:text-[8px]
+              md:text-[9px]
               uppercase
-              tracking-[0.55em]
+              tracking-[0.45em]
+              sm:tracking-[0.5em]
+              md:tracking-[0.55em]
               text-white/30
+              whitespace-nowrap
             "
           >
             THE WORK STARTS WITH AN IDEA
@@ -683,15 +772,17 @@ export default function Overlay() {
           <h2
             className="
               font-serif
-              text-[8vw]
+              text-[6.5vw]
+              sm:text-[7.5vw]
+              md:text-[6vw]
               font-light
               leading-[0.72]
               tracking-[-0.08em]
-              md:text-[6vw]
             "
           >
             Let's build
             <br />
+
             <span className="italic text-white/40">
               something.
             </span>
@@ -711,10 +802,15 @@ export default function Overlay() {
           <p
             className="
               font-mono
-              text-[9px]
+              text-[7px]
+              sm:text-[8px]
+              md:text-[9px]
               uppercase
-              tracking-[0.45em]
+              tracking-[0.35em]
+              sm:tracking-[0.4em]
+              md:tracking-[0.45em]
               text-white/30
+              whitespace-nowrap
             "
           >
             SOFTWARE ENGINEER
