@@ -1,6 +1,6 @@
 "use client";
 
-import { motion type Variants} from "framer-motion";
+import { motion ,type Variants} from "framer-motion";
 import Link from "next/link";
 
 const GithubIcon = (props: React.SVGProps<SVGSVGElement>) => (
