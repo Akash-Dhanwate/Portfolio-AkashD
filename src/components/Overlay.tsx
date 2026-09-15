@@ -128,27 +128,6 @@ export default function Overlay() {
         "
       >
         <div>
-          <p
-            className="
-              mb-5
-              font-mono
-              text-[7px]
-              sm:text-[8px]
-              md:text-[10px]
-              uppercase
-              tracking-[0.4em]
-              sm:tracking-[0.5em]
-              md:tracking-[0.6em]
-              text-white/40
-              absolute
-              top-48
-              left-20
-              whitespace-nowrap
-            "
-          >
-            00 / 01 — INTRODUCING
-          </p>
-
           <h1
             className="
               font-serif
@@ -178,9 +157,10 @@ export default function Overlay() {
               leading-none
               tracking-[-0.08em]
               absolute
-              top-99
+              top-100
               left-20
               whitespace-nowrap
+              text-c
             "
           >
             Software Engineer
@@ -211,21 +191,6 @@ export default function Overlay() {
         "
       >
         <div>
-          <p
-            className="
-              font-mono
-              text-[7px]
-              sm:text-[8px]
-              md:text-[10px]
-              uppercase
-              tracking-[0.4em]
-              sm:tracking-[0.5em]
-              md:tracking-[0.55em]
-              text-white/30
-            "
-          >
-            01 — MINDSET
-          </p>
 
           <h2
             className="
@@ -661,37 +626,7 @@ export default function Overlay() {
             AKASH / 2026
           </p>
         </div>
-
-        {/* TOP RIGHT */}
-
-        <div
-          className="
-            absolute
-            right-[5vw]
-            top-[8vh]
-            text-right
-          "
-        >
-          <p
-            className="
-              font-mono
-              text-[7px]
-              sm:text-[8px]
-              md:text-[9px]
-              uppercase
-              tracking-[0.35em]
-              sm:tracking-[0.4em]
-              md:tracking-[0.45em]
-              text-white/35
-              whitespace-nowrap
-            "
-          >
-            01 — 08
-          </p>
-        </div>
-
-        {/* LEFT */}
-
+  
         <div
           className="
             absolute
