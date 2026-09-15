@@ -40,6 +40,25 @@ const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
+const InstagramIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <rect width="20" height="20" x="2" y="2" rx="5" />
+    <circle cx="12" cy="12" r="4" />
+    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+  </svg>
+);
+
 const XIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -107,18 +126,23 @@ export default function Footer() {
   const socials = [
     {
       icon: GithubIcon,
-      href: "https://github.com",
+      href: "https://github.com/akash-dhanwate",
       label: "GitHub",
     },
     {
       icon: LinkedinIcon,
-      href: "https://linkedin.com",
+      href: "https://linkedin.com/in/4kashdhanwate",
       label: "LinkedIn",
     },
     {
       icon: XIcon,
-      href: "https://x.com",
+      href: "https://x.com/akash_dhanwate7",
       label: "X",
+    },
+    {
+    icon: InstagramIcon,
+      href: "https://www.instagram.com/akash_dhanwate1",
+      label: "Instagram",
     },
   ];
 
