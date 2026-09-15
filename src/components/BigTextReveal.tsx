@@ -27,7 +27,7 @@ export default function BigTextReveal() {
 
   const opacity1 = useTransform(
     scrollYProgress,
-    [0.05, 0.12],
+    [0.01, 0.12],
     [0, 1]
   );
 
@@ -37,13 +37,13 @@ export default function BigTextReveal() {
 
   const y2 = useTransform(
     scrollYProgress,
-    [0.16, 0.28],
+    [0.20, 0.30],
     [40, 0]
   );
 
   const opacity2 = useTransform(
     scrollYProgress,
-    [0.16, 0.24],
+    [0.19, 0.24],
     [0, 1]
   );
 
@@ -142,6 +142,7 @@ export default function BigTextReveal() {
               leading-[0.85]
               font-black
               tracking-[-0.06em]
+              text-c
             "
           >
             THE

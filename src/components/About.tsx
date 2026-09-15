@@ -419,39 +419,39 @@ export default function About() {
   // TURNING
   const secondY1 = useTransform(
     scrollYProgress,
-    [0.32, 0.38],
+    [0.30, 0.38],
     [45, 0]
   );
 
   const secondOpacity1 = useTransform(
     scrollYProgress,
-    [0.32, 0.36],
+    [0.30, 0.36],
     [0, 1]
   );
 
   // IDEAS INTO
   const secondY2 = useTransform(
     scrollYProgress,
-    [0.37, 0.43],
+    [0.35, 0.43],
     [45, 0]
   );
 
   const secondOpacity2 = useTransform(
     scrollYProgress,
-    [0.37, 0.41],
+    [0.35, 0.41],
     [0, 1]
   );
 
   // REAL SOFTWARE
   const secondY3 = useTransform(
     scrollYProgress,
-    [0.42, 0.48],
+    [0.40, 0.48],
     [45, 0]
   );
 
   const secondOpacity3 = useTransform(
     scrollYProgress,
-    [0.42, 0.46],
+    [0.40, 0.46],
     [0, 1]
   );
 
@@ -589,6 +589,7 @@ export default function About() {
                 font-black
                 tracking-[-0.06em]
                 whitespace-nowrap
+                text-c
               "
             >
               ENGINEERING
@@ -664,7 +665,28 @@ export default function About() {
                 whitespace-nowrap
               "
             >
-              REAL SOFTWARE.
+              REAL
+            </motion.h2>
+            <motion.h2
+              style={{
+                y: secondY3,
+                opacity: secondOpacity3,
+              }}
+              className="
+                text-[clamp(1.65rem,6.5vw,7rem)]
+                leading-[0.88]
+                font-black
+                tracking-[-0.06em]
+                text-transparent
+                bg-clip-text
+                bg-gradient-to-r
+                from-neutral-400
+                via-white
+                to-neutral-500
+                whitespace-nowrap
+              "
+            >
+              SOFTWARE.
             </motion.h2>
 
           </div>
@@ -706,7 +728,7 @@ export default function About() {
               `}
             >
               I'm currently pursuing my{" "}
-              <span className="font-bold text-white">
+              <span className="font-bold text-white text-c">
                 B.Tech
               </span>{" "}
               in Computer Engineering and I'm passionate
