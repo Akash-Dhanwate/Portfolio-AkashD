@@ -15,7 +15,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Creative Developer | Portfolio",
+  title: "Akash Dhanwate | Portfolio",
   description: "Awwwards-level scrollytelling personal portfolio.",
 };
 
