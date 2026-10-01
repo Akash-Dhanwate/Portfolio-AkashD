@@ -146,7 +146,6 @@ export default function Overlay() {
           >
             Akash
           </h1>
-
           <h1
             className="
               font-serif
