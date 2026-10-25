@@ -282,7 +282,6 @@ export default function Footer() {
                     border-white/10
                     bg-white/[0.04]
                     backdrop-blur-md
-
                     sm:h-16
                     sm:w-16
                   "
@@ -377,10 +376,8 @@ export default function Footer() {
             uppercase
             tracking-[0.14em]
             text-neutral-600
-
             sm:flex-row
             sm:text-[10px]
-
             md:pt-8
             md:text-xs
             md:tracking-widest

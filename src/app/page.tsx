@@ -17,8 +17,12 @@ export default function Home() {
           <Overlay />
         </ScrollyCanvas>
       </div>
+      <div>
       <BigTextReveal />
+      </div>
+      <div id="about">
       <About />
+      </div>
       <div id="work">
         <Projects />
       </div>

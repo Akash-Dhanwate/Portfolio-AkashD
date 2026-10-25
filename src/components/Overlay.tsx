@@ -113,7 +113,7 @@ export default function Overlay() {
           01 — INTRO
           ===================================================== */}
 
-      <Scene
+      {/* <Scene
         progress={time}
         start={0}
         end={0.8}
@@ -167,13 +167,13 @@ export default function Overlay() {
 
           <div className="mt-7 flex items-center justify-center gap-4" />
         </div>
-      </Scene>
+      </Scene> */}
 
       {/* =====================================================
           02 — CURIOUS
           ===================================================== */}
 
-      <Scene
+      {/* <Scene
         progress={time}
         start={0.8}
         end={1.37}
@@ -219,13 +219,13 @@ export default function Overlay() {
             </span>
           </h2>
         </div>
-      </Scene>
+      </Scene> */}
 
       {/* =====================================================
           03 — LEARN
           ===================================================== */}
 
-      <Scene
+      {/* <Scene
         progress={time}
         start={1.35}
         end={1.9}
@@ -305,12 +305,12 @@ export default function Overlay() {
             </span>
           </h1>
         </div>
-      </Scene>
+      </Scene> */}
 
       {/* =====================================================
           04 — BUILD
           ===================================================== */}
-
+{/* 
       <Scene
         progress={time}
         start={1.9}
@@ -364,13 +364,13 @@ export default function Overlay() {
             </span>
           </h2>
         </div>
-      </Scene>
+      </Scene> */}
 
       {/* =====================================================
           EMPTY SCENE
           ===================================================== */}
 
-      <Scene
+      {/* <Scene
         progress={time}
         start={2.1}
         end={2.7}
@@ -403,7 +403,7 @@ export default function Overlay() {
             "
           />
         </div>
-      </Scene>
+      </Scene> */}
 
       {/* =====================================================
           05 — CODE
@@ -456,9 +456,9 @@ export default function Overlay() {
           07 — PROCESS
           ===================================================== */}
 
-      <Scene
+      {/* <Scene
         progress={time}
-        start={3.3}
+        start={3}
         end={5}
         enterY={45}
         scaleFrom={0.9}
@@ -471,29 +471,6 @@ export default function Overlay() {
         "
       >
         <div>
-          <p
-            className="
-              mb-8
-              font-mono
-              text-[7px]
-              sm:text-[8px]
-              md:text-[9px]
-              uppercase
-              tracking-[0.4em]
-              sm:tracking-[0.5em]
-              md:tracking-[0.6em]
-              text-white/30
-              absolute
-              top-1/2
-              left-1/2
-              -translate-x-1/2
-              -translate-y-1/2
-              whitespace-nowrap
-            "
-          >
-            THE PROCESS
-          </p>
-
           <h2
             className="
               font-serif
@@ -504,12 +481,13 @@ export default function Overlay() {
               italic
               leading-[0.7]
               tracking-[-0.09em]
+              text-white/80
             "
           >
             Think.
             <br />
 
-            <span className="ml-[0.7em]">
+            <span className="ml-[0.7em] text-white/60">
               Build.
             </span>
 
@@ -521,12 +499,12 @@ export default function Overlay() {
 
             <br />
 
-            <span className="ml-[1.2em]">
+            <span className="ml-[1.2em] text-white/50">
               Improve.
             </span>
           </h2>
         </div>
-      </Scene>
+      </Scene> */}
 
       {/* =====================================================
           08 — PHILOSOPHY
